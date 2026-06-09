@@ -12,30 +12,42 @@
       font-family: Georgia, 'Times New Roman', serif;
     }
 
+    /* Full-screen background — use pseudo-element so fixed works on iOS */
     body {
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
+      min-height: 100dvh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
       background:
         linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.20) 50%, rgba(0,0,0,0.50) 100%),
         url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80')
-        center center / cover no-repeat fixed;
+        center center / cover no-repeat;
+      z-index: -1;
     }
 
     .card {
       text-align: center;
-      padding: 3rem 4rem;
+      padding: clamp(1.5rem, 5vw, 3rem) clamp(1.25rem, 6vw, 4rem);
       background: transparent;
     }
 
     h1 {
-      font-size: clamp(3rem, 8vw, 6rem);
+      font-size: clamp(2.5rem, 12vw, 6rem);
       font-weight: 400;
       letter-spacing: 0.35em;
       text-transform: uppercase;
       color: #ffffff;
-      text-shadow: 0 2px 24px rgba(0,0,0,0.4);
+      text-shadow: 0 2px 24px rgba(0,0,0,0.5);
+      /* Prevent letter-spacing overflow on small screens */
+      padding-right: 0.35em;
     }
 
     .divider {
@@ -47,8 +59,9 @@
 
     a.email {
       display: inline-block;
-      font-size: clamp(0.85rem, 2vw, 1.05rem);
-      letter-spacing: 0.2em;
+      font-size: clamp(0.8rem, 3.5vw, 1.05rem);
+      letter-spacing: 0.15em;
+      padding-right: 0.15em;
       text-transform: lowercase;
       color: rgba(255, 255, 255, 0.80);
       text-decoration: none;
